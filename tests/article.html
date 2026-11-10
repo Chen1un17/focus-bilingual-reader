@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How Attention Works in Long Reading Sessions</title>
+<style>
+  body { font: 19px/1.65 Georgia, serif; color: #222; background: #fff; max-width: 720px; margin: 32px auto; padding: 0 20px; }
+  nav a { margin-right: 12px; }
+  .spacer { height: 3200px; }
+</style>
+</head>
+<body>
+  <nav><a href="#">Home</a><a href="#">About our research and our many publications</a></nav>
+  <h1>How Attention Works in Long Reading Sessions</h1>
+  <article>
+    <p class="lead">Sustained attention is a limited resource, and <em>working</em> memory holds only a few items at a time, so long articles quickly become tiring.</p>
+    <h2>Why paragraphs matter</h2>
+    <p>Short paragraphs give readers frequent resting points. Researchers have found that models of reading often treat a paragraph as a unit of meaning, and it’s important to keep each one focused on a single idea.</p>
+    <ul>
+      <li>Chunking text into smaller sections reduces cognitive load for many readers.
+        <ul><li>Nested list items should be translated separately from their parents.</li></ul>
+      </li>
+      <li>Clear headings act as signposts that help people regain their place after a distraction.</li>
+    </ul>
+    <blockquote>Attention is the rarest and purest form of generosity, according to a famous essay.</blockquote>
+    <pre><code>const x = translate(paragraph); // code blocks should never be translated</code></pre>
+    <p>这一段已经是中文了，不需要翻译。只有 a few English words 混在里面。</p>
+    <p>Button</p>
+    <div class="note">A note inside a div with <a href="#">an inline link</a> and enough words to be translated properly.<p>A paragraph nested after the note text inside the same div element.</p></div>
+    <div class="brs">First paragraph inside a block that uses double line breaks between paragraphs.<br><br>Second paragraph after a double break, with <b>bold words</b> inside it.<br>Still the second paragraph after one single line break.<br>
+      <br>Third paragraph that closes the block written in the old style.</div>
+    <p>SKIPME This paragraph is dropped by the mock server on the first attempt so the retry logic gets exercised.</p>
+    <div class="spacer"></div>
+    <h2>Far below the fold</h2>
+    <p>Far paragraph one explains that translation should happen lazily as the reader scrolls down the page.</p>
+    <p>Far paragraph two describes how caching avoids paying twice for the same sentence in later sessions.</p>
+    <p>Far paragraph three reminds readers that small rewards keep motivation steady during long tasks.</p>
+  </article>
+  <footer><p>Copyright footer text should never be translated by the extension at all.</p></footer>
+</body>
+</html>

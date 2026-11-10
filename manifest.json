@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "专注双语阅读 · DeepSeek",
+  "short_name": "专注双语",
+  "version": "1.0.0",
+  "description": "一键把网页英文译成中文，原文与译文逐段对照，并高亮每段的重心词。为 ADHD 长文阅读设计。",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
+  "host_permissions": ["https://api.deepseek.com/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "双语对照阅读本页（Alt+T）",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png" }
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+T" },
+      "description": "开启 / 关闭当前页的双语对照"
+    }
+  },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" }
+}

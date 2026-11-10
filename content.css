@@ -1,0 +1,129 @@
+/* 专注双语阅读 · 页面内样式
+   排版依据：WCAG 1.4.8（CJK 每行 ≤ 40 字、行距 ≥ 1.5 倍、不两端对齐）、
+   W3C COGA 与英国读写障碍协会的建议（减少干扰、降低饱和度、少用动效）。 */
+
+/* 译文块：一段原文 + 紧跟的一段译文 = 一个阅读单元 */
+fbr-t {
+  --fbr-accent: color-mix(in srgb, #6c7cf0 70%, currentColor);
+  display: block !important;
+  box-sizing: border-box !important;
+  max-width: 40em !important;
+  margin: 0.6em 0 0.3em !important;
+  padding: 0.5em 0.9em 0.55em !important;
+  border: 0 !important;
+  border-left: 3px solid var(--fbr-accent) !important;
+  border-radius: 0 8px 8px 0 !important;
+  background: color-mix(in srgb, currentColor 5%, transparent) !important;
+  color: inherit !important;
+  font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif !important;
+  font-size: max(calc(1em * var(--fbr-scale, 1)), 15px) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.02em !important;
+  text-align: start !important;
+  text-indent: 0 !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* 标题的译文：轻一点，不加底色 */
+fbr-t[data-h] {
+  margin: 0.3em 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  font-size: max(calc(0.8em * var(--fbr-scale, 1)), 15px) !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+  opacity: 0.85;
+}
+
+/* 等待中：两条静止的占位条（不闪烁、不滚动） */
+fbr-t[data-state="loading"]::before,
+fbr-t[data-state="loading"]::after {
+  content: "";
+  display: block;
+  height: 0.62em;
+  margin: 0.45em 0;
+  border-radius: 4px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+fbr-t[data-state="loading"]::before { width: min(100%, 30em); }
+fbr-t[data-state="loading"]::after { width: min(65%, 18em); }
+fbr-t[data-h][data-state="loading"]::after { display: none; }
+
+/* 译文出现时淡入一次，提示“这里刚有变化” */
+fbr-t[data-state="done"] { animation: fbr-in 0.25s ease-out; }
+@keyframes fbr-in { from { opacity: 0; } }
+
+fbr-t[data-state="failed"] {
+  font-size: max(calc(0.85em * var(--fbr-scale, 1)), 14px) !important;
+  opacity: 0.75;
+}
+fbr-retry {
+  display: inline-block;
+  padding: 0 0.6em;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  cursor: pointer;
+  user-select: none;
+}
+fbr-retry:hover { background: color-mix(in srgb, currentColor 18%, transparent); }
+
+/* 重心词：同一对（英文 ↔ 中文）用同一种颜色。
+   第一个是本段最核心的词，整块底色；其余是半高的荧光笔底纹。颜色都降低了饱和度。 */
+fbr-k {
+  --fbr-c: rgba(250, 204, 21, 0.42);
+  color: inherit !important;
+  background: linear-gradient(transparent 55%, var(--fbr-c) 55%) !important;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: box-shadow 0.15s ease;
+}
+fbr-k[data-c="0"] { --fbr-c: rgba(250, 204, 21, 0.42); }
+fbr-k[data-c="1"] { --fbr-c: rgba(74, 222, 128, 0.32); }
+fbr-k[data-c="2"] { --fbr-c: rgba(96, 165, 250, 0.34); }
+fbr-k[data-c="3"] { --fbr-c: rgba(244, 114, 182, 0.30); }
+fbr-k[data-c="4"] { --fbr-c: rgba(167, 139, 250, 0.34); }
+fbr-k[data-c="5"] { --fbr-c: rgba(251, 146, 60, 0.32); }
+fbr-k[data-core] { background: var(--fbr-c) !important; }
+fbr-k[data-hot] {
+  box-shadow: 0 0 0 2px var(--fbr-c), 0 0 0 3px color-mix(in srgb, currentColor 30%, transparent);
+}
+
+/* 专注模式：除了当前段落，整页蒙一层淡色 */
+fbr-spot {
+  all: initial;
+  display: block !important;
+  position: fixed !important;
+  z-index: 2147483646 !important;
+  pointer-events: none !important;
+  border-radius: 10px;
+  box-shadow: 0 0 0 200vmax rgba(255, 255, 255, 0.62);
+  transition: opacity 0.2s ease;
+}
+fbr-spot[data-theme="dark"] { box-shadow: 0 0 0 200vmax rgba(0, 0, 0, 0.55); }
+fbr-spot[data-move] {
+  transition: top 0.2s ease, height 0.2s ease, left 0.2s ease, width 0.2s ease, opacity 0.2s ease;
+}
+
+fbr-panel {
+  all: initial !important;
+  display: block !important;
+  position: fixed !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  z-index: 2147483647 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  fbr-t, fbr-k, fbr-spot, fbr-spot[data-move] { animation: none !important; transition: none !important; }
+}
+
+@media print {
+  fbr-panel, fbr-spot { display: none !important; }
+}

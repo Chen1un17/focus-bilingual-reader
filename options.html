@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>专注双语阅读 · 设置</title>
+<link rel="stylesheet" href="content.css">
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <img src="icons/128.png" alt="" width="44" height="44">
+    <div>
+      <h1>专注双语阅读</h1>
+      <p class="sub">英文网页逐段对照翻译 · 重心词高亮 · DeepSeek V4.1 Flash</p>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2><span class="step">1</span>连接 DeepSeek</h2>
+    <div class="field">
+      <label for="apiKey">API Key</label>
+      <div class="row">
+        <input id="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-…">
+        <button id="toggleKey" type="button" class="ghost">显示</button>
+      </div>
+      <p class="hint">在 <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noreferrer">DeepSeek 开放平台</a> 创建。只存在这台电脑的浏览器里，只会发给下方的 API 地址。</p>
+    </div>
+    <div class="field">
+      <label for="model">模型</label>
+      <select id="model">
+        <option value="deepseek-flash">deepseek-flash（V4.1 Flash，快又便宜，推荐）</option>
+        <option value="deepseek-v4-pro">deepseek-v4-pro（更强，价格约 4.5 倍）</option>
+        <option value="custom">其他模型名…</option>
+      </select>
+      <input id="customModel" type="text" spellcheck="false" placeholder="输入模型名" hidden>
+    </div>
+    <details class="field">
+      <summary>高级：API 地址</summary>
+      <label for="baseUrl" class="sr">API 地址</label>
+      <div class="row">
+        <input id="baseUrl" type="url" spellcheck="false" placeholder="https://api.deepseek.com">
+        <button id="grant" type="button" class="ghost" hidden>授权访问</button>
+      </div>
+      <p class="hint">用中转或代理时才需要改。换成其他域名后，浏览器会请你授权访问该地址。</p>
+    </details>
+    <div class="actions">
+      <button id="test" type="button">测试连接</button>
+      <span id="testResult" class="status" role="status"></span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">2</span>阅读偏好</h2>
+    <fieldset class="field">
+      <legend>每段高亮几个重心词</legend>
+      <div class="choices">
+        <label><input type="radio" name="density" value="low"><span><b>克制</b><small>1–2 个</small></span></label>
+        <label><input type="radio" name="density" value="medium"><span><b>适中</b><small>2–3 个 · 推荐</small></span></label>
+        <label><input type="radio" name="density" value="high"><span><b>丰富</b><small>3–5 个</small></span></label>
+      </div>
+      <p class="hint">高亮越少越醒目。每段第一个词用整块底色，是这一段最核心的意思。</p>
+    </fieldset>
+    <fieldset class="field">
+      <legend>译文字号</legend>
+      <div class="choices">
+        <label><input type="radio" name="fontScale" value="1"><span><b>跟随原文</b></span></label>
+        <label><input type="radio" name="fontScale" value="1.1"><span><b>大一号</b></span></label>
+        <label><input type="radio" name="fontScale" value="1.2"><span><b>大两号</b></span></label>
+      </div>
+    </fieldset>
+    <label class="check"><input id="focusDefault" type="checkbox"><span>打开双语时直接进入专注模式（淡化当前段落以外的内容）</span></label>
+
+    <div class="demo" aria-label="效果预览">
+      <p class="demo-title">效果预览</p>
+      <p class="demo-en"><fbr-k data-c="0" data-core data-pair="d0">Sleep deprivation</fbr-k> impairs <fbr-k data-c="1" data-pair="d1">working memory</fbr-k>, but even a <fbr-k data-c="2" data-pair="d2">short nap</fbr-k> can restore it.<fbr-t id="demoT" data-state="done" lang="zh-CN"><fbr-k data-c="0" data-core data-pair="d0">睡眠不足</fbr-k>会损害<fbr-k data-c="1" data-pair="d1">工作记忆</fbr-k>，但哪怕只是<fbr-k data-c="2" data-pair="d2">短暂的小睡</fbr-k>，也能让它恢复。</fbr-t></p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">3</span>快捷键与缓存</h2>
+    <p class="line">开关当前页：<kbd id="shortcut">Alt+T</kbd><button id="editShortcut" type="button" class="link">修改快捷键</button></p>
+    <p class="line">已缓存 <b id="cacheCount">…</b> 段译文，重新打开同一页面不再花钱。<button id="clearCache" type="button" class="link">清除缓存</button></p>
+  </section>
+
+  <p class="saved" id="saved" role="status" aria-live="polite"></p>
+</main>
+<script src="options.js"></script>
+</body>
+</html>
